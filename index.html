@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Prompt Generator & Hub Administrasi Guru SMP - Fase D</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .tab-active { border-bottom: 3px solid #2563eb; color: #2563eb; font-weight: 600; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-700 via-indigo-700 to-slate-900 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <div class="flex items-center space-x-3">
+                        <span class="bg-blue-500/30 text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-blue-400/30">Kurikulum Merdeka 2026</span>
+                        <span class="bg-emerald-500/30 text-emerald-200 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-emerald-400/30">Fase D (Kelas 7, 8, 9)</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight mt-1">Master Prompt Generator & Ekosistem Perangkat Guru SMP</h1>
+                    <p class="text-blue-100 text-sm mt-0.5">Satu ekosistem terintegrasi untuk 16 perangkat pembelajaran & administrasi digital</p>
+                </div>
+                <div class="flex items-center space-x-2 text-xs bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/10">
+                    <i class="fas fa-[#00d2ff] fa-circle-info text-blue-300 text-base"></i>
+                    <div>
+                        <div class="font-medium text-white">Acuan Regulasi Terakhir:</div>
+                        <div class="text-blue-200">Permendikdasmen No. 1/2026 & Kepka BKPDM 020/2026</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full">
+
+        <!-- Navigation Tabs -->
+        <div class="flex border-b border-slate-200 mb-6 space-x-6 overflow-x-auto custom-scrollbar">
+            <button onclick="switchTab('generator')" id="tab-btn-generator" class="tab-active py-3 px-1 text-sm font-medium flex items-center whitespace-nowrap">
+                <i class="fas fa-wand-magic-sparkles mr-2"></i> Prompt Generator (16 Perangkat)
+            </button>
+            <button onclick="switchTab('tahapan')" id="tab-btn-tahapan" class="text-slate-500 hover:text-slate-700 py-3 px-1 text-sm font-medium flex items-center whitespace-nowrap">
+                <i class="fas fa-sitemap mr-2"></i> Alur Ekosistem 6 Tahap
+            </button>
+            <button onclick="switchTab('regulasi')" id="tab-btn-regulasi" class="text-slate-500 hover:text-slate-700 py-3 px-1 text-sm font-medium flex items-center whitespace-nowrap">
+                <i class="fas fa-scale-balanced mr-2"></i> Landasan Regulasi Resmi
+            </button>
+        </div>
+
+        <!-- TAB 1: GENERATOR PROMPT -->
+        <div id="tab-generator" class="space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- Sidebar Input Identitas -->
+                <div class="lg:col-span-1 bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
+                        <h2 class="font-bold text-slate-800 text-base flex items-center">
+                            <i class="fas fa-sliders text-blue-600 mr-2"></i> Identitas Pembelajaran
+                        </h2>
+                        <button onclick="resetForm()" class="text-xs text-slate-400 hover:text-red-500 transition">
+                            <i class="fas fa-undo mr-1"></i>Reset
+                        </button>
+                    </div>
+
+                    <div class="space-y-3 text-sm">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Satuan Pendidikan (SMP)</label>
+                            <input type="text" id="input-sekolah" value="SMP Negeri 1 Bojong Gede" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Mata Pelajaran</label>
+                            <input type="text" id="input-mapel" value="Informatika" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">Kelas</label>
+                                <select id="input-kelas" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                                    <option value="VII">VII (Tujuh)</option>
+                                    <option value="VIII">VIII (Delapan)</option>
+                                    <option value="IX">IX (Sembilan)</option>
+                                    <option value="VII, VIII, IX">VII, VIII, dan IX (Semua)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">Semester</label>
+                                <select id="input-semester" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                                    <option value="Ganjil">Ganjil</option>
+                                    <option value="Genap">Genap</option>
+                                    <option value="Ganjil & Genap">Ganjil & Genap</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">Tahun Pelajaran</label>
+                                <input type="text" id="input-tp" value="2026/2027" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">Alokasi Waktu Total</label>
+                                <input type="text" id="input-jp" value="72 JP" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Guru Pengampu</label>
+                            <input type="text" id="input-guru" value="Ahmad Fauzi, S.Pd." class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Topik / Materi Spesifik (Opsional)</label>
+                            <input type="text" id="input-materi" value="Algoritma dan Pemrograman Python Dasar" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" placeholder="Contoh: Tata Surya, Aljabar, dll.">
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-slate-100">
+                        <button onclick="updateAllPrompts()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg shadow-sm transition flex items-center justify-center text-sm">
+                            <i class="fas fa-rotate mr-2"></i> Perbarui Semua Prompt
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Area Generator Prompt -->
+                <div class="lg:col-span-2 space-y-4">
+                    
+                    <!-- Mode Selector & Master Prompt Copy -->
+                    <div class="bg-gradient-to-r from-slate-800 to-indigo-900 text-white p-4 rounded-xl shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <div>
+                            <h3 class="font-semibold text-sm flex items-center">
+                                <i class="fas fa-crown text-amber-400 mr-2"></i> Master Prompt Utama
+                            </h3>
+                            <p class="text-xs text-slate-300 mt-0.5">Sertakan prompt ini di awal percakapan sebelum meminta perangkat spesifik.</p>
+                        </div>
+                        <button onclick="copyMasterPrompt()" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center whitespace-nowrap">
+                            <i class="fas fa-copy mr-1.5"></i> Salin Master Prompt
+                        </button>
+                    </div>
+
+                    <!-- Pilih Perangkat -->
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Pilih Perangkat Administrasi (1-16 + Audit)</label>
+                        <select id="select-prompt" onchange="renderSelectedPrompt()" class="w-full px-3 py-2.5 border border-slate-300 rounded-lg text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-slate-50">
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+
+                    <!-- Display Box Prompt -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 flex flex-col h-[520px]">
+                        <div class="px-4 py-3 border-b border-slate-200 bg-slate-50 rounded-t-xl flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span id="prompt-badge" class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded">Tahap 1</span>
+                                <h3 id="prompt-title" class="font-bold text-slate-800 text-sm">Judul Perangkat</h3>
+                            </div>
+                            <button onclick="copyCurrentPrompt()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition flex items-center">
+                                <i class="fas fa-copy mr-1.5"></i> Salin Prompt Ini
+                            </button>
+                        </div>
+                        <div class="p-4 flex-grow overflow-y-auto custom-scrollbar bg-slate-900 text-slate-100 font-mono text-xs leading-relaxed rounded-b-xl whitespace-pre-wrap" id="prompt-content">
+                            <!-- Prompt Content Inserted via JS -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: ALUR EKOSISTEM 6 TAHAP -->
+        <div id="tab-tahapan" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-lg font-bold text-slate-800 mb-2 flex items-center">
+                    <i class="fas fa-diagram-project text-blue-600 mr-2.5"></i> Strategi Pengembangan Ekosistem Administrasi Guru
+                </h2>
+                <p class="text-sm text-slate-600 mb-6">Agar perangkat tidak bertentangan, buatlah dokumen mengikuti 6 tahap berurutan di bawah ini.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Step 1 -->
+                    <div class="border border-blue-200 bg-blue-50/50 p-4 rounded-xl relative">
+                        <span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">1</span>
+                        <h3 class="font-bold text-blue-900 text-sm mb-1">Tahap 1: Fondasi Kurikulum</h3>
+                        <p class="text-xs text-blue-700 mb-3">Menentukan alur logis materi & target waktu setahun.</p>
+                        <ul class="text-xs text-slate-700 space-y-1 pl-4 list-disc">
+                            <li>5. Dokumen CP Resmi</li>
+                            <li>4. Alur Tujuan Pembelajaran (ATP)</li>
+                            <li>3. Alokasi Waktu Pembelajaran</li>
+                            <li>8. Program Tahunan (PROTA)</li>
+                            <li>9. Program Semester (PROMES)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="border border-emerald-200 bg-emerald-50/50 p-4 rounded-xl relative">
+                        <span class="absolute top-3 right-3 bg-emerald-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">2</span>
+                        <h3 class="font-bold text-emerald-900 text-sm mb-1">Tahap 2: Perencanaan Pembelajaran</h3>
+                        <p class="text-xs text-emerald-700 mb-3">Merancang skenario pembelajaran di kelas.</p>
+                        <ul class="text-xs text-slate-700 space-y-1 pl-4 list-disc">
+                            <li>1. Modul Ajar Lengkap</li>
+                            <li>2. Lembar Kerja Peserta Didik (LKPD)</li>
+                            <li>16. Panduan Buku Guru</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="border border-amber-200 bg-amber-50/50 p-4 rounded-xl relative">
+                        <span class="absolute top-3 right-3 bg-amber-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">3</span>
+                        <h3 class="font-bold text-amber-900 text-sm mb-1">Tahap 3: Asesmen & Penilaian</h3>
+                        <p class="text-xs text-amber-700 mb-3">Menentukan kriteria ketuntasan & instrumen tes.</p>
+                        <ul class="text-xs text-slate-700 space-y-1 pl-4 list-disc">
+                            <li>7. KKTP (Kriteria Ketercapaian)</li>
+                            <li>15. Kisi-Kisi Soal Sumatif</li>
+                            <li>14. Naskah STS dan SAS</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="border border-purple-200 bg-purple-50/50 p-4 rounded-xl relative">
+                        <span class="absolute top-3 right-3 bg-purple-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">4</span>
+                        <h3 class="font-bold text-purple-900 text-sm mb-1">Tahap 4: Pelaksanaan & Rekam Jurnal</h3>
+                        <p class="text-xs text-purple-700 mb-3">Pencatatan realisasi pembelajaran & kesiswaan.</p>
+                        <ul class="text-xs text-slate-700 space-y-1 pl-4 list-disc">
+                            <li>6. Jurnal Harian Mengajar</li>
+                            <li>10. Buku Administrasi Wali Kelas</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="border border-indigo-200 bg-indigo-50/50 p-4 rounded-xl relative">
+                        <span class="absolute top-3 right-3 bg-indigo-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">5</span>
+                        <h3 class="font-bold text-indigo-900 text-sm mb-1">Tahap 5: Digitalisasi Aplikasi HTML</h3>
+                        <p class="text-xs text-indigo-700 mb-3">Aplikasi praktis tanpa instalasi (offline-first).</p>
+                        <ul class="text-xs text-slate-700 space-y-1 pl-4 list-disc">
+                            <li>11. Aplikasi Absensi Siswa HTML</li>
+                            <li>12. Aplikasi Pengolah Nilai HTML</li>
+                            <li>13. Aplikasi Rapor Siswa HTML</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="border border-rose-200 bg-rose-50/50 p-4 rounded-xl relative">
+                        <span class="absolute top-3 right-3 bg-rose-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">6</span>
+                        <h3 class="font-bold text-rose-900 text-sm mb-1">Tahap 6: Sinkronisasi & Audit</h3>
+                        <p class="text-xs text-rose-700 mb-3">Pemeriksaan keterkaitan data secara menyeluruh.</p>
+                        <ul class="text-xs text-slate-700 space-y-1 pl-4 list-disc">
+                            <li>Prompt Audit & Sinkronisasi Ekosistem</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: LANDASAN REGULASI RESMI -->
+        <div id="tab-regulasi" class="hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                    <i class="fas fa-book-bookmark text-blue-600 mr-2.5"></i> Landasan Regulasi Kurikulum Merdeka SMP (Per November 2026)
+                </h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left text-slate-700 border-collapse">
+                        <thead class="bg-slate-100 text-slate-800 font-bold uppercase text-[11px] border-b border-slate-200">
+                            <tr>
+                                <th class="p-3">Aspek Standar</th>
+                                <th class="p-3">Regulasi / Nomor Keputusan</th>
+                                <th class="p-3">Keterangan & Catatan Penting</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold text-slate-900">Standar Kompetensi Lulusan (SKL)</td>
+                                <td class="p-3 text-blue-600 font-medium">Permendikdasmen No. 10 Tahun 2025</td>
+                                <td class="p-3">Memuat 8 dimensi profil lulusan yang terintegrasi dalam pembelajaran.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold text-slate-900">Standar Isi</td>
+                                <td class="p-3 text-blue-600 font-medium">Permendikdasmen No. 12 Tahun 2025</td>
+                                <td class="p-3">Acuan ruang lingkup materi jenjang SMP/Fase D.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold text-slate-900">Standar Proses</td>
+                                <td class="p-3 text-blue-600 font-medium">Permendikdasmen No. 1 Tahun 2026</td>
+                                <td class="p-3 bg-amber-50/50"><strong>Perubahan Terbaru:</strong> Menggantikan Permendikbudristek No. 16 Tahun 2022. Menerapkan Pembelajaran Mendalam (Deep Learning).</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold text-slate-900">Standar Penilaian</td>
+                                <td class="p-3 text-blue-600 font-medium">Permendikbudristek No. 21 Tahun 2022</td>
+                                <td class="p-3">Ketentuan Asesmen Formatif, Sumatif, KKTP, dan Pelaporan Hasil Belajar.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold text-slate-900">Capaian Pembelajaran (CP) Utuh</td>
+                                <td class="p-3 text-blue-600 font-medium">Kepka BSKAP No. 046/H/KR/2025</td>
+                                <td class="p-3">CP Fase D berlaku utuh untuk akhir Fase D (Kelas 7, 8, 9 SMP).</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold text-slate-900">Perubahan CP Terbaru 2026</td>
+                                <td class="p-3 text-blue-600 font-medium">Kepka BKPDM No. 020 Tahun 2026</td>
+                                <td class="p-3 bg-amber-50/50">Khusus penyesuaian CP Mata Pelajaran Agama dan Budi Pekerti. Mapel lain tetap menggunakan CP 046/2025.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold text-slate-900">Panduan Pembelajaran & Asesmen</td>
+                                <td class="p-3 text-blue-600 font-medium">PPA Edisi Revisi 2025</td>
+                                <td class="p-3">Panduan teknis penyusunan ATP, Modul Ajar, KKTP, dan Deskripsi Rapor.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white px-4 py-3 rounded-lg shadow-xl text-xs flex items-center space-x-2 border border-slate-700 hidden transition transform translate-y-2">
+        <i class="fas fa-check-circle text-emerald-400 text-base"></i>
+        <span id="toast-message">Prompt berhasil disalin ke clipboard!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-4 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p>Ekosistem Administrasi Guru SMP Fase D &copy; 2026 — Sesuai Standar Kurikulum Merdeka Terbaru Kemendikdasmen</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // DATA 16 PROMPT + AUDIT
+        const promptTemplates = [
+            {
+                id: 1,
+                tahap: "Tahap 2",
+                title: "1. Modul Ajar Lengkap (Deep Learning)",
+                getPrompt: (d) => `Buatkan MODUL AJAR LENGKAP berpendekatan Pembelajaran Mendalam (Deep Learning) untuk SMP Fase D, Kelas [${d.kelas}], mata pelajaran [${d.mapel}], semester [${d.semester}], tahun pelajaran [${d.tp}].
+
+Gunakan seluruh ketentuan MASTER PROMPT dan regulasi Standar Proses Permendikdasmen No. 1 Tahun 2026.
+
+Identitas Pembelajaran:
+- Sekolah: ${d.sekolah}
+- Guru Pengampu: ${d.guru}
+- Alokasi Waktu: ${d.jp}
+- Materi Pokok: ${d.materi}
+
+Sistematika modul ajar:
+1. Identitas modul.
+2. Identifikasi kesiapan peserta didik.
+3. Karakteristik materi pembelajaran.
+4. Integrasi 8 Dimensi Profil Lulusan (Permendikdasmen 10/2025).
+5. Capaian Pembelajaran (CP) Fase D sesuai Kepka BSKAP 046/2025.
+6. Tujuan Pembelajaran (TP).
+7. Pemahaman bermakna & Pertanyaan pemantik.
+8. Media, alat, bahan, dan sumber belajar.
+9. Asesmen awal/diagnostik.
+10. Langkah pembelajaran terperinci (Pendahuluan, Inti, Penutup) berkesadaran, bermakna, dan menggembirakan.
+11. Diferensiasi konten, proses, dan produk.
+12. Asesmen formatif & sumatif + Rubrik KKTP.
+13. Program Remedial & Pengayaan.
+14. Refleksi guru dan peserta didik.
+15. Lampiran bahan ajar & instrumen penilaian.
+
+Format dokumen rapi, siap dicetak, dan lengkap secara substantif.`
+            },
+            {
+                id: 2,
+                tahap: "Tahap 2",
+                title: "2. LKPD (Lembar Kerja Peserta Didik)",
+                getPrompt: (d) => `Buatkan LKPD lengkap dan interaktif untuk mata pelajaran [${d.mapel}], kelas [${d.kelas}], Fase D, materi [${d.materi}], semester [${d.semester}].
+
+Komponen LKPD:
+1. Sampul & Identitas Peserta Didik / Kelompok.
+2. Judul Kegiatan & Tujuan Pembelajaran.
+3. Petunjuk pengerjaan & Alat/Bahan.
+4. Permasalahan Konseptual / Kontekstual Sehari-hari.
+5. Aktivitas Eksplorasi, Pengamatan, atau Eksperimen.
+6. Pertanyaan Pemantik Berpikir Kritis & Problem Solving.
+7. Ruang Kerja / Tempat Jawaban Siswa.
+8. Lembar Presentasi / Komunikasi Hasil.
+9. Refleksi Peserta Didik & Rubrik Penilaian Kinerja.
+
+Buat LKPD berpusat pada siswa, menarik untuk remaja SMP, dan siap dicetak.`
+            },
+            {
+                id: 3,
+                tahap: "Tahap 1",
+                title: "3. Perhitungan Alokasi Waktu Pembelajaran",
+                getPrompt: (d) => `Susun dokumen ALOKASI WAKTU PEMBELAJARAN untuk SMP Fase D, mata pelajaran [${d.mapel}], kelas [${d.kelas}], tahun pelajaran [${d.tp}].
+
+Perhitungkan berdasarkan:
+- Total minggu dalam semester Ganjil dan Genap.
+- Perhitungan minggu efektif dan minggu tidak efektif (libur, asesmen, kegiatan sekolah).
+- Alokasi JP total: ${d.jp}.
+
+Sajikan dalam bentuk TABEL LENGKAP:
+- Bulan | Jumlah Minggu | Minggu Tidak Efektif | Minggu Efektif | Jumlah JP | Lingkup Materi | Keterangan
+- Berikan Rekapitulasi Matematis yang Konsisten (Semester Ganjil, Genap, dan Total 1 Tahun).`
+            },
+            {
+                id: 4,
+                tahap: "Tahap 1",
+                title: "4. ATP (Alur Tujuan Pembelajaran)",
+                getPrompt: (d) => `Buatkan ALUR TUJUAN PEMBELAJARAN (ATP) mata pelajaran [${d.mapel}] SMP Fase D utuh untuk kelas VII, VIII, dan IX.
+
+Langkah penyusunan:
+1. Tampilkan CP Resmi Kepka BSKAP 046/2025 secara utuh.
+2. Analisis Elemen, Kompetensi Prasyarat, dan Lingkup Materi.
+3. Turunkan CP menjadi Tujuan Pembelajaran (TP) yang terukur.
+4. Urutkan TP secara hierarkis dan logis, lalu distribusikan ke kelas VII, VIII, dan IX.
+5. Sajikan TABEL ATP:
+   [No | Elemen | Capaian Pembelajaran | Tujuan Pembelajaran | Lingkup Materi | Urutan Pembelajaran | Kelas | Semester | Alokasi JP | Indikator Ketercapaian | Bentuk Asesmen]
+
+Berikan narasi rasionalisasi pembagian materi antar-kelas dalam Fase D.`
+            },
+            {
+                id: 5,
+                tahap: "Tahap 1",
+                title: "5. Dokumen CP (Capaian Pembelajaran) Resmi",
+                getPrompt: (d) => `Buatkan dokumen CAPAIAN PEMBELAJARAN (CP) mata pelajaran [${d.mapel}] SMP Fase D berdasar regulasi resmi Kepka BSKAP No. 046/H/KR/2025 (dan Kepka BKPDM No. 020/2026 jika Agama).
+
+Format Dokumen:
+1. Identitas Mata Pelajaran & Rasionalitas.
+2. Tujuan & Karakteristik Mata Pelajaran.
+3. Elemen CP dan Deskripsi Setiap Elemen.
+4. Teks CP Utuh Akhir Fase D (Tanpa memotong CP per kelas).
+5. Implikasi CP terhadap Skenario Pembelajaran & Asesmen SMP.
+6. Referensi Dasar Hukum Lengkap (Permendikdasmen 10/2025, 12/2025, 1/2026).`
+            },
+            {
+                id: 6,
+                tahap: "Tahap 4",
+                title: "6. Jurnal Harian Mengajar Guru",
+                getPrompt: (d) => `Buatkan JURNAL HARIAN MENGAJAR GURU SMP untuk mata pelajaran [${d.mapel}], kelas [${d.kelas}], semester [${d.semester}], tahun pelajaran [${d.tp}].
+
+Sajikan TABEL SIAP CETAK dengan kolom:
+- No | Hari & Tanggal | Jam Ke | Kelas | Materi / Topik | Tujuan Pembelajaran (TP) | Aktivitas Utama | Absensi (H/S/I/A) | Kendala & Solusi | Refleksi & Tindak Lanjut | Paraf
+
+Lengkapi dengan:
+- Rekapitulasi keterlaksanaan ATP bulanan.
+- Catatan pendampingan khusus siswa yang membutuhkan remedial.`
+            },
+            {
+                id: 7,
+                tahap: "Tahap 3",
+                title: "7. KKTP (Kriteria Ketercapaian Tujuan Pembelajaran)",
+                getPrompt: (d) => `Susun dokumen KKTP (KRITERIA KETERCAPAIAN TUJUAN PEMBELAJARAN) mata pelajaran [${d.mapel}], kelas [${d.kelas}], Fase D.
+
+Sajikan TABEL DESKRIPTIF & INTERVAL KETERCAPAIAN:
+- No TP | Tujuan Pembelajaran | Indikator Ketercapaian | Kriteria Belum Tercapai (0-60) | Kriteria Mulai Berkembang (61-75) | Kriteria Tercapai (76-90) | Kriteria Melampaui (91-100) | Teknik Asesmen | Rencana Tindak Lanjut
+
+Sertakan contoh rubrik penilaian kontekstual untuk Pengetahuan, Keterampilan, dan Sikap.`
+            },
+            {
+                id: 8,
+                tahap: "Tahap 1",
+                title: "8. PROTA (Program Tahunan)",
+                getPrompt: (d) => `Buatkan PROGRAM TAHUNAN (PROTA) mata pelajaran [${d.mapel}] SMP Fase D kelas [${d.kelas}] tahun pelajaran [${d.tp}].
+
+Sajikan TABEL PROTA:
+- No | Elemen CP | Tujuan Pembelajaran (TP) | Materi Pokok | Semester | Alokasi Waktu (JP) | Keterangan
+
+Lengkapi dengan rekapitulasi total JP Semester Ganjil, Semester Genap, dan total JP setahun (harus sinkron dengan Alokasi Waktu total: ${d.jp}).`
+            },
+            {
+                id: 9,
+                tahap: "Tahap 1",
+                title: "9. PROMES (Program Semester)",
+                getPrompt: (d) => `Buatkan PROGRAM SEMESTER (PROMES) mata pelajaran [${d.mapel}] SMP Fase D kelas [${d.kelas}] semester [${d.semester}] tahun pelajaran [${d.tp}].
+
+Sajikan TABEL MATRIKS MINGGUAN per bulan:
+- No | TP | Materi Pokok | Alokasi JP | Jan | Feb | Mar | Apr | Mei | Jun (atau Jul-Des)
+- Tandai minggu efektif, pelaksanaan asesmen formatif/sumatif, serta minggu cadangan.
+- Pastikan PROMES merupakan rincian presisi dari PROTA.`
+            },
+            {
+                id: 10,
+                tahap: "Tahap 4",
+                title: "10. Buku Administrasi Wali Kelas",
+                getPrompt: (d) => `Buatkan BUKU ADMINISTRASI WALI KELAS SMP untuk kelas [${d.kelas}] tahun pelajaran [${d.tp}]. Sekolah: ${d.sekolah}, Wali Kelas: ${d.guru}.
+
+Struktur Dokumen Praktis:
+1. Identitas Kelas & Denah Tempat Duduk.
+2. Data Organisasi Kelas & Jadwal Piket.
+3. Rekap Kehadiran Siswa (H/S/I/A).
+4. Catatan Pembinaan, Prestasi, dan Konseling Siswa.
+5. Rekap Perkembangan Akademik & Ketuntasan TP.
+6. Kesepakatan & Tata Tertib Kelas.
+7. Format Laporan Komunikasi dengan Orang Tua / Wali.`
+            },
+            {
+                id: 11,
+                tahap: "Tahap 5",
+                title: "11. Aplikasi Absensi Siswa HTML (Single File)",
+                getPrompt: (d) => `Bertindak sebagai Web Developer Profesional. Buatkan APLIKASI ABSENSI SISWA SMP berbasis HTML, CSS (Tailwind), dan JavaScript dalam 1 FILE HTML UTUH.
+
+Identitas Aplikasi:
+- Sekolah: ${d.sekolah} | Kelas: ${d.kelas} | Tahun: ${d.tp}
+
+Fitur Wajib:
+1. Dashboard Statistik Kehadiran Harian & Bulanan.
+2. Input/Edit/Hapus Data Siswa & Impor/Ekspor CSV.
+3. Pencatatan Absensi (Hadir, Sakit, Izin, Alpa, Terlambat).
+4. Penyimpanan Lokal (LocalStorage) Browser.
+5. Fitur Cetak Rekapitulasi Presensi Siap Cetak.
+6. Desain modern, responsive, dan tanpa dependensi server.
+
+Nama File Output: aplikasi_absensi_smp.html`
+            },
+            {
+                id: 12,
+                tahap: "Tahap 5",
+                title: "12. Aplikasi Pengolahan Nilai HTML (Single File)",
+                getPrompt: (d) => `Bertindak sebagai Web Developer Pendidikan. Buatkan APLIKASI PENGOLAHAN NILAI PESERTA DIDIK SMP berbasis 1 FILE HTML LENGKAP.
+
+Mata Pelajaran: ${d.mapel} | Kelas: ${d.kelas} | Semester: ${d.semester}
+
+Fitur Utama:
+1. Input Daftar TP dan Nilai KKTP.
+2. Input Nilai Formatif, Sumatif (STS/SAS), dan Proyek.
+3. Analisis Otomatis Ketercapaian TP (Belum Tercapai / Tercapai / Melampaui).
+4. Rekap Nilai Akhir & Deskripsi Otomatis Capaian Kompetensi.
+5. Ekspor/Impor CSV & Fitur Cetak Laporan Kelas.
+6. Penyimpanan LocalStorage offline-first.
+
+Nama File Output: aplikasi_pengolahan_nilai_smp.html`
+            },
+            {
+                id: 13,
+                tahap: "Tahap 5",
+                title: "13. Aplikasi Rapor Siswa HTML (Single File)",
+                getPrompt: (d) => `Buatkan APLIKASI RAPOR PESERTA DIDIK SMP Fase D berbasis Single File HTML (HTML, CSS Tailwind, JavaScript).
+
+Identitas: ${d.sekolah} | Kelas: ${d.kelas} | Semester: ${d.semester}
+
+Fitur Wajib:
+1. Manajemen Data Identitas Siswa & Sekolah.
+2. Impor Data Nilai & Deskripsi Capaian Kompetensi.
+3. Generator Tampilan Rapor Resmi Kurikulum Merdeka.
+4. Fitur Cetak Rapor Per Siswa atau Cetak Massal (PDF via Print Browser).
+5. Backup & Restore Data JSON/CSV.
+
+Nama File Output: aplikasi_rapor_smp.html`
+            },
+            {
+                id: 14,
+                tahap: "Tahap 3",
+                title: "14. Perangkat SAS dan STS (Naskah & Kunci)",
+                getPrompt: (d) => `Buatkan Perangkat Asesmen STS (Sumatif Tengah Semester) dan SAS (Sumatif Akhir Semester) untuk mata pelajaran [${d.mapel}], kelas [${d.kelas}], semester [${d.semester}].
+
+Masing-masing paket berisi:
+1. Kisi-kisi Ringkas & Indikator Soal.
+2. Naskah Soal Variatif (Pilihan Ganda, PG Kompleks, Menjodohkan, Isian Singkat, Uraian).
+3. Kunci Jawaban Resmi & Pedoman Penskoran.
+4. Rubrik Penilaian Soal Uraian / Kinerja.
+
+Soal harus HOTS, kontekstual, dan siap dicetak.`
+            },
+            {
+                id: 15,
+                tahap: "Tahap 3",
+                title: "15. Kisi-Kisi Soal Sumatif",
+                getPrompt: (d) => `Buatkan KISI-KISI SOAL SUMATIF LENGKAP mata pelajaran [${d.mapel}], kelas [${d.kelas}], Fase D, semester [${d.semester}].
+
+Sajikan TABEL KISI-KISI:
+- No | Elemen CP | Tujuan Pembelajaran (TP) | Materi Pokok | Indikator Soal | Level Kognitif (C1-C6) | Bentuk Soal | Nomor Soal | Bobot Skor
+
+Lengkapi dengan Naskah Soal Lampiran yang presisi sesuai indikator.`
+            },
+            {
+                id: 16,
+                tahap: "Tahap 2",
+                title: "16. Buku Panduan Guru",
+                getPrompt: (d) => `Buatkan BUKU GURU sebagai pedoman pelaksanaan pembelajaran mata pelajaran [${d.mapel}] SMP Fase D Kelas [${d.kelas}].
+
+Sistematika Buku Guru:
+- BAB I: Pendahuluan & Rasional Kurikulum Merdeka.
+- BAB II: Analisis CP, TP, dan ATP Fase D.
+- BAB III: Panduan Pelaksanaan Pembelajaran Mendalam (Deep Learning) & Diferensiasi.
+- BAB IV: Panduan Unit Pembelajaran Per Bab (Materi, Skenario, Pertanyaan Pemantik, Asesmen).
+- BAB V: Panduan Asesmen, Penilaian, dan Remedial/Pengayaan.
+- BAB VI: Pengelolaan Kelas & Pemanfaatan Media Digital.`
+            },
+            {
+                id: 17,
+                tahap: "Tahap 6",
+                title: "★ PROMPT AUDIT & SINKRONISASI EKOSISTEM",
+                getPrompt: (d) => `Bertindaklah sebagai Auditor Kurikulum dan Ahli Administrasi Pembelajaran SMP.
+
+Saya telah menyusun 16 perangkat administrasi untuk mata pelajaran [${d.mapel}], Kelas [${d.kelas}], Sekolah [${d.sekolah}].
+
+Lakukan AUDIT KONSISTENSI terhadap 6 Aspek:
+1. Kesesuaian Regulasi (Permendikdasmen 10/2025, 12/2025, 1/2026).
+2. Konsistensi Kurikulum (CP -> TP -> ATP -> Modul -> LKPD).
+3. Konsistensi Waktu (Alokasi Waktu -> PROTA -> PROMES -> Jurnal).
+4. Konsistensi Asesmen (TP -> KKTP -> Kisi-kisi -> STS/SAS).
+5. Konsistensi Data Digital (Absensi -> Nilai -> Rapor).
+6. Kelayakan Praktis di Kelas SMP.
+
+Sajikan Laporan Audit dalam TABEL EVALUASI & Tindak Lanjut Perbaikan Otomatis.`
+            }
+        ];
+
+        // INIT & POPULATE SELECT
+        window.addEventListener('DOMContentLoaded', () => {
+            const selectEl = document.getElementById('select-prompt');
+            promptTemplates.forEach((pt, index) => {
+                const opt = document.createElement('option');
+                opt.value = index;
+                opt.textContent = `[${pt.tahap}] ${pt.title}`;
+                selectEl.appendChild(opt);
+            });
+            renderSelectedPrompt();
+        });
+
+        function getFormData() {
+            return {
+                sekolah: document.getElementById('input-sekolah').value || '[Nama SMP]',
+                mapel: document.getElementById('input-mapel').value || '[Nama Mapel]',
+                kelas: document.getElementById('input-kelas').value,
+                semester: document.getElementById('input-semester').value,
+                tp: document.getElementById('input-tp').value || '2026/2027',
+                jp: document.getElementById('input-jp').value || '72 JP',
+                guru: document.getElementById('input-guru').value || '[Nama Guru]',
+                materi: document.getElementById('input-materi').value || '[Materi Pokok]'
+            };
+        }
+
+        function renderSelectedPrompt() {
+            const index = document.getElementById('select-prompt').value;
+            const data = getFormData();
+            const item = promptTemplates[index];
+
+            document.getElementById('prompt-badge').textContent = item.tahap;
+            document.getElementById('prompt-title').textContent = item.title;
+            document.getElementById('prompt-content').textContent = item.getPrompt(data);
+        }
+
+        function updateAllPrompts() {
+            renderSelectedPrompt();
+            showToast("Data identitas diperbarui untuk seluruh prompt!");
+        }
+
+        function resetForm() {
+            document.getElementById('input-sekolah').value = 'SMP Negeri 1 Bojong Gede';
+            document.getElementById('input-mapel').value = 'Informatika';
+            document.getElementById('input-kelas').value = 'VII';
+            document.getElementById('input-semester').value = 'Ganjil';
+            document.getElementById('input-tp').value = '2026/2027';
+            document.getElementById('input-jp').value = '72 JP';
+            document.getElementById('input-guru').value = 'Ahmad Fauzi, S.Pd.';
+            document.getElementById('input-materi').value = 'Algoritma dan Pemrograman Python Dasar';
+            renderSelectedPrompt();
+            showToast("Formulir berhasil di-reset!");
+        }
+
+        function copyCurrentPrompt() {
+            const content = document.getElementById('prompt-content').textContent;
+            navigator.clipboard.writeText(content).then(() => {
+                showToast("Prompt berhasil disalin ke clipboard!");
+            });
+        }
+
+        function copyMasterPrompt() {
+            const d = getFormData();
+            const masterText = `MASTER PROMPT: PENGEMBANGAN PERANGKAT ADMINISTRASI GURU SMP FASE D
+
+PERAN AI:
+Bertindaklah sebagai Ahli Kurikulum Pendidikan SMP, Pengembang Perangkat Kurikulum Merdeka, Ahli Asesmen Pendidikan, dan Desainer Aplikasi Digital Pendidikan.
+
+IDENTITAS PERANGKAT:
+- Satuan Pendidikan: ${d.sekolah}
+- Jenjang / Fase: SMP / Fase D
+- Mata Pelajaran: ${d.mapel}
+- Kelas / Semester: ${d.kelas} / ${d.semester}
+- Tahun Pelajaran: ${d.tp}
+- Alokasi Waktu Total: ${d.jp}
+- Guru Pengampu: ${d.guru}
+- Pendekatan: Pembelajaran Mendalam (Deep Learning)
+
+LANDASAN REGULASI HUKUM RESMI:
+1. Permendikdasmen No. 10 Tahun 2025 (Standar Kompetensi Lulusan - 8 Dimensi Profil Lulusan).
+2. Permendikdasmen No. 12 Tahun 2025 (Standar Isi SMP).
+3. Permendikdasmen No. 1 Tahun 2026 (Standar Proses - Deep Learning).
+4. Permendikbudristek No. 21 Tahun 2022 (Standar Penilaian).
+5. Kepka BSKAP No. 046/H/KR/2025 (CP Resmi Merdeka).
+6. Kepka BKPDM No. 020 Tahun 2026 (Penyesuaian CP 2026).
+7. Panduan Pembelajaran dan Asesmen (PPA) Edisi Revisi 2025.
+
+KETENTUAN UTAMA:
+- Ekosistem terintegrasi (CP -> ATP -> Modul Ajar -> KKTP -> Asesmen -> Rapor).
+- Dilarang membuat CP fiktif. Selalu gunakan struktur Fase D utuh.
+- Output rapi, sistematis, profesional, dan siap dicetak/digunakan.`;
+
+            navigator.clipboard.writeText(masterText).then(() => {
+                showToast("Master Prompt berhasil disalin!");
+            });
+        }
+
+        function switchTab(tabName) {
+            ['generator', 'tahapan', 'regulasi'].forEach(t => {
+                document.getElementById(`tab-${t}`).classList.add('hidden');
+                document.getElementById(`tab-btn-${t}`).classList.remove('tab-active');
+                document.getElementById(`tab-btn-${t}`).classList.add('text-slate-500');
+            });
+
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-btn-${tabName}`).classList.add('tab-active');
+            document.getElementById(`tab-btn-${tabName}`).classList.remove('text-slate-500');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('hidden');
+            toast.classList.remove('translate-y-2');
+            setTimeout(() => {
+                toast.classList.add('translate-y-2');
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
